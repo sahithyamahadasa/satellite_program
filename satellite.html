@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bringing the Sky Down to Earth — Space Tech & Satellites</title>
+  <style>
+    :root{
+      --bg:#071026;
+      --fg:#e8f4ff;
+      --gold:#ffd76a;
+      --sky:#8ecbff;
+      --muted:#9aa7bd;
+      --card: rgba(255,255,255,.04);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%; margin:0; font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
+    body{
+      color:var(--fg);
+      background:
+        radial-gradient(800px 400px at 10% 10%, rgba(142,203,255,.03), transparent 20%),
+        radial-gradient(800px 400px at 90% 80%, rgba(255,215,106,.03), transparent 20%),
+        var(--bg);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow:hidden;
+    }
+
+    /* Layout */
+    .wrap{display:flex;flex-direction:column;height:100vh;}
+    header, footer{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:12px 18px;
+      background:linear-gradient(to bottom, rgba(255,255,255,0.02), transparent);
+      backdrop-filter:blur(6px);
+      position:relative;
+      z-index:1000; /* ensure header/buttons are above slides */
+    }
+    .title{font-weight:700; font-size:16px}
+    .slides{flex:1; position:relative; z-index:1;}
+    .slide{
+      position:absolute;
+      inset:0;
+      padding:48px 6vw;
+      opacity:0;
+      transform:translateX(30px) scale(.99);
+      transition:all .45s ease;
+      pointer-events:none;
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+    .slide.active{opacity:1;transform:none;pointer-events:auto}
+
+    .h1{font-size:clamp(28px,6vw,56px);margin:0;line-height:1.05}
+    .h2{font-size:clamp(20px,3.8vw,32px);margin:0}
+    .lead{color:var(--muted);font-size:clamp(15px,2.2vw,19px);margin:0;max-width:80ch}
+
+    .grid{display:grid;gap:16px}
+    .cols-2{grid-template-columns:repeat(2,1fr)}
+    .cols-3{grid-template-columns:repeat(3,1fr)}
+    .cols-4{grid-template-columns:repeat(4,1fr)}
+    .card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:14px}
+    .ico{width:48px;height:48px;border-radius:999px;display:grid;place-items:center;margin-bottom:8px;background:linear-gradient(135deg, rgba(255,215,106,.08), rgba(142,203,255,.06))}
+    .muted{color:var(--muted)}
+    .pill{display:inline-flex;align-items:center;gap:10px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.04);font-weight:600;color:var(--muted)}
+
+    .progress{height:6px;background:rgba(255,255,255,.05);border-radius:999px;overflow:hidden;margin:0 18px}
+    .bar{height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--sky));transition:width .35s ease}
+
+    .controls{display:flex;gap:8px;align-items:center}
+    button{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);color:var(--fg);padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:700}
+    button:hover{background:rgba(255,255,255,.15)}
+    button[disabled]{opacity:.5;cursor:not-allowed}
+    button[type="button"]{outline:none}
+    .hint{color:var(--muted);font-size:13px}
+
+    /* small star overlay */
+    .stars{position:absolute;inset:0;pointer-events:none;z-index:0}
+    .stars i{position:absolute;width:2px;height:2px;border-radius:50%;background:rgba(255,255,255,.9);opacity:.6;animation:tw 3s infinite ease-in-out}
+    @keyframes tw{0%,100%{opacity:.3}50%{opacity:1}}
+
+    @media (max-width:900px){
+      .cols-4{grid-template-columns:repeat(2,1fr)}
+      .cols-3{grid-template-columns:repeat(2,1fr)}
+      .cols-2{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="title">Bringing the Sky Down to Earth — Space Tech & Satellites</div>
+      <div class="controls" role="group" aria-label="Navigation controls">
+        <button id="prev" type="button">← Prev</button>
+        <button id="next" type="button">Next →</button>
+      </div>
+    </header>
+
+    <div class="progress" aria-hidden="true"><div class="bar" id="bar"></div></div>
+
+    <main class="slides" id="slides" role="main" aria-live="polite">
+
+      <!-- Slide 1 -->
+      <section class="slide active" data-slide="1" aria-label="Title slide">
+        <div class="stars" id="stars"></div>
+        <h1 class="h1" style="color:var(--gold)">Bringing the Sky Down to Earth</h1>
+        <p class="lead">Space Tech & Satellites for Everyday Life — <strong style="color:var(--sky)">How Space Innovations Help Even Farmers</strong></p>
+        <div style="margin-top:18px" class="pill">Final Year B.Sc. Computer Science • Python • Cloud • Data Analytics</div>
+        <p class="hint" style="position:absolute;bottom:22px;left:6vw">Tip: Use ← / → / Space to navigate • Press F for fullscreen</p>
+      </section>
+
+      <!-- Slide 2 -->
+      <section class="slide" data-slide="2" aria-label="Introduction">
+        <h2 class="h2">Why Space Tech Matters <span class="muted">— Beyond Rockets</span></h2>
+        <p class="lead">Satellites are silent helpers orbiting thousands of kilometers above us, solving everyday problems—especially for farmers.</p>
+      </section>
+
+      <!-- Slide 3 -->
+      <section class="slide" data-slide="3" aria-label="Everyday uses">
+        <h2 class="h2">Everyday Uses of Satellites</h2>
+        <div class="grid cols-4" style="margin-top:12px">
+          <div class="card" role="group" aria-label="GPS and Navigation"><div class="ico">📍</div><strong>GPS & Navigation</strong><p class="muted">Turn-by-turn routes, logistics timing.</p></div>
+          <div class="card" role="group" aria-label="Communication"><div class="ico">📡</div><strong>Communication</strong><p class="muted">Satellite internet, broadcasting.</p></div>
+          <div class="card" role="group" aria-label="Weather"><div class="ico">🌦</div><strong>Weather Forecasting</strong><p class="muted">Storm tracking and rainfall maps.</p></div>
+          <div class="card" role="group" aria-label="Disaster"><div class="ico">🚨</div><strong>Disaster Management</strong><p class="muted">Imagery & connectivity during crises.</p></div>
+        </div>
+      </section>
+
+      <!-- Slide 4 -->
+      <section class="slide" data-slide="4" aria-label="Satellites in agriculture">
+        <h2 class="h2">Satellites in Agriculture</h2>
+        <div class="grid cols-3" style="margin-top:12px">
+          <div class="card"><div class="ico">💧</div><strong>Soil Moisture Mapping</strong><p class="muted">Prevent over/under-watering with moisture indices.</p></div>
+          <div class="card"><div class="ico">🐛</div><strong>Early Pest Alerts</strong><p class="muted">Vegetation stress detection (NDVI).</p></div>
+          <div class="card"><div class="ico">📊</div><strong>Yield Prediction</strong><p class="muted">Forecast production to plan markets & storage.</p></div>
+        </div>
+      </section>
+
+      <!-- Slide 5 -->
+      <section class="slide" data-slide="5" aria-label="Real life examples">
+        <h2 class="h2">Real-Life Examples</h2>
+        <p class="lead">This is not fiction — satellite programs actively support agriculture and food security today.</p>
+        <ul>
+          <li><strong>ISRO — BHUVAN</strong>: free geospatial layers for crops, water, disasters.</li>
+          <li><strong>NASA Earth Observatory</strong>: drought & rainfall monitoring at scale.</li>
+          <li><strong>Precision Farming</strong>: GPS-enabled tractors with cm accuracy.</li>
+        </ul>
+      </section>
+
+      <!-- Slide 6 -->
+      <section class="slide" data-slide="6" aria-label="Future vision">
+        <h2 class="h2">Future: Smarter Fields, Smarter Skies</h2>
+        <ul>
+          <li>AI + Satellites → Mobile farming alerts</li>
+          <li>Drones + Space → Field-level monitoring</li>
+          <li>Blockchain → Food traceability</li>
+        </ul>
+      </section>
+
+      <!-- Slide 7 -->
+      <section class="slide" data-slide="7" aria-label="Conclusion">
+        <h2 class="h2">Conclusion</h2>
+        <p class="lead">Satellites are digital bridges between heaven and earth — empowering not just astronauts but farmers and families.</p>
+        <h3 class="h2" style="margin-top:10px">“The future of farming is not just in the soil — it is in the <span style="color:var(--gold)">stars</span>.”</h3>
+      </section>
+
+      <!-- Slide 8 -->
+      <section class="slide" data-slide="8" aria-label="Thank you">
+        <h1 class="h1">Thank You</h1>
+        <p class="lead">Questions & Discussions Welcome</p>
+        <div style="margin-top:14px" class="pill">Your Name • Final Year B.Sc. Computer Science</div>
+      </section>
+
+    </main>
+
+    <footer>
+      <div class="hint">← / → or Space to navigate • Press F for fullscreen</div>
+      <div style="min-width:160px"></div>
+    </footer>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const bar = document.getElementById('bar');
+      const nextBtn = document.getElementById('next');
+      const prevBtn = document.getElementById('prev');
+      if (!slides.length) return;
+
+      let index = 0;
+      function updateBar() {
+        if (bar) bar.style.width = ((index + 1) / slides.length * 100) + '%';
+      }
+      function show(i) {
+        index = Math.max(0, Math.min(slides.length - 1, i));
+        slides.forEach((s, si) => s.classList.toggle('active', si === index));
+        updateBar();
+        // disable/enable buttons for clarity
+        if (prevBtn) prevBtn.disabled = index === 0;
+        if (nextBtn) nextBtn.disabled = index === slides.length - 1;
+      }
+
+      function next() { show(index + 1); }
+      function prev() { show(index - 1); }
+
+      // Bind click handlers safely
+      if (nextBtn) nextBtn.addEventListener('click', next);
+      if (prevBtn) prevBtn.addEventListener('click', prev);
+
+      // Keyboard handling: supports different browsers' key names
+      document.addEventListener('keydown', (e) => {
+        const k = e.key || e.code || '';
+        if (k === 'ArrowRight' || k === 'PageDown') { e.preventDefault(); next(); }
+        else if (k === 'ArrowLeft' || k === 'PageUp') { e.preventDefault(); prev(); }
+        else if (k === ' ' || k === 'Spacebar' || k === 'Space' || k === 'Spacebar') { e.preventDefault(); next(); }
+        else if (k === 'f' || k === 'F' || k === 'KeyF') {
+          if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+          else document.exitFullscreen?.();
+        }
+      });
+
+      // Touch swipe support (left/right)
+      let touchStartX = 0;
+      let touchEndX = 0;
+      const touchArea = document.querySelector('.slides') || document.body;
+      touchArea.addEventListener('touchstart', (ev) => {
+        touchStartX = ev.changedTouches[0].clientX;
+      }, {passive:true});
+      touchArea.addEventListener('touchend', (ev) => {
+        touchEndX = ev.changedTouches[0].clientX;
+        const dx = touchEndX - touchStartX;
+        if (dx > 40) prev();
+        else if (dx < -40) next();
+      }, {passive:true});
+
+      // Generate subtle stars (only if element exists)
+      const starsWrap = document.getElementById('stars');
+      if (starsWrap) {
+        const count = 110;
+        for (let n = 0; n < count; n++) {
+          const s = document.createElement('i');
+          s.style.left = (Math.random() * 100) + '%';
+          s.style.top = (Math.random() * 100) + '%';
+          s.style.opacity = (0.3 + Math.random() * 0.7).toFixed(2);
+          s.style.animationDelay = (Math.random() * 3).toFixed(2) + 's';
+          starsWrap.appendChild(s);
+        }
+      }
+
+      // Init
+      show(0);
+    });
+  </script>
+</body>
+</html>
